@@ -9,7 +9,7 @@ $order_out = ['ga:source', 'ga:medium', 'ga:campaign', 'ga:adCost', 'ga:adClicks
 def convert(twitter_csv_path, twitter_out_file_path)
 	out = $order_out.to_csv
 	CSV.foreach(twitter_csv_path, :headers => true) do |row|
-		out_temp = [row['id'], row['product type'], row['campaign'], row['Spend'], row['Clicks'], row['Impressions']]
+		out_temp = ['twitter.com', row['product type'], row['campaign'], row['Spend'], row['Clicks'], row['Impressions']]
 		out += out_temp.to_csv
 	end
 	File.open(twitter_out_file_path, "wb") { |file| file.write(out) }	

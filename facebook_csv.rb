@@ -24,8 +24,13 @@ def convert(ad_account_id, facebook_out_file_path)
     raise "Facebook request error: " + result['error']['message']
   end
   
+  out = $order_out.to_csv
+  out_temp = [result['id'],result['this is wrong'],result['adcampaign_id'],
+  						result['spent'],result['clicks'],result['impressions']]
 
-
+  out += out_temp.to_csv
+	
+	File.open(facebook_out_file_path, "wb") { |file| file.write(out) }
 
 end
 

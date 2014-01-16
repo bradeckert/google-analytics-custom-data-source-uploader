@@ -2,3 +2,5 @@
 test.csv
 out.csv
 Gemfile.lock
+client_secrets.json
+personal_data.json
