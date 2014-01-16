@@ -36,15 +36,16 @@ client.authorization = flow.authorize
 t = Time.now
 t = t.strftime "%Y-%m-%d"
 # Make an API call.
-media = Google::APIClient::UploadIO.new('out.csv', 'text/csv')
+media = Google::APIClient::UploadIO.new('out.csv', 'application/octet-stream')
 metadata = {
-    'mimetype' => 'application/octet-stream',
+    'title'     => t + ":daily_upload",
+    'mimeType'  => 'application/octet-stream',
     'resumable' => true
 }
 
 result = client.execute(
   :api_method => analytics.management.daily_uploads.upload,
-  :parameters => {'uploadType'          => "resumable",
+  :parameters => {'uploadType'          => "multipart",
                   'accountId'           => personal_data['accountId'],
                   'appendNumber'        => 1,
                   'reset'               => true,
@@ -53,7 +54,8 @@ result = client.execute(
                   'type'                => "cost",
                   'webPropertyId'       => personal_data['webPropertyId']
                 },
-  :media       => media
+  :media       => media,
+  :body_object => metadata
 )
 
-puts result.data
+puts result.data.to_hash
