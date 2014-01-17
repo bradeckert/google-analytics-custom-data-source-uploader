@@ -1,5 +1,6 @@
 .bundle/
-test.csv
+f_test.csv
+t_test.csv
 out.csv
 Gemfile.lock
 client_secrets.json

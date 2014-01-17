@@ -10,19 +10,20 @@ require 'time'
 #  Output: CSV ready to be uploaded to GA
 $order_out = ['ga:source','ga:medium','ga:campaign','ga:adCost','ga:adClicks','ga:impressions']
 
-def convert(ad_account_id, facebook_out_file_path, facebook_in_file_path=nil)
+def convert(facebook_out_file_path, facebook_in_file_path=nil)
   if(facebook_in_file_path)
     # manually convert a facebook csv to correct format
     out = $order_out.to_csv
     CSV.foreach(facebook_in_file_path, :headers => true) do |row|
-      out_temp = ['facebook.com', 'cpc', row['campaign'], row['Spend (USD)'], row['Clicks'], row['Impressions']]
+      out_temp = ['facebook.com', 'cpc', row['Campaign'], row['Spend (USD)'], row['Clicks'], row['Impressions']]
       out += out_temp.to_csv
     end
     File.open(facebook_out_file_path, "wb") { |file| file.write(out) } 
   else
-
+    puts "Wrong"
     # TODO: Need access tokens
     # This code will call facebook api and get ad data back
+    # TODO: Add facebook acct info to personal_data.json
   	t = Time.now
     base_url = "https://graph.facebook.com/act_#{ad_account_id}/stats"
     start_time_url = "start_time=#{t.year}-#{t.month}-#{t.day-1}T00:00:00"
