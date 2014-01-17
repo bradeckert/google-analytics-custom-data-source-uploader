@@ -1,4 +1,4 @@
-#Google Analytics Custom Data Source Uploader, v1.0
+#Google Analytics Custom Data Source Uploader, v0.1.0
 ==================================
 
 ##:newspaper: Description
@@ -14,7 +14,7 @@ This ruby script imports data (cost, clicks, etc.) from facebook and twitter ad 
 
 
 ##:mega: Executing the script
-Note: As of version 1.0, api requests to facebook are not supported.
+Note: As of version 0.1.0, api requests to facebook are not supported.
 
 * Twitter: Run `ruby twitter_csv.rb [out_name].csv [in_name].csv`
 * Facebook: Run `ruby facebook_csv.rb [out_name].csv [in_name].csv`
