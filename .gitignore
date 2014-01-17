@@ -1,7 +1,7 @@
 .bundle/
 f_test.csv
 t_test.csv
-out.csv
 Gemfile.lock
-client_secrets.json
 personal_data.json
+.DS_Store
+*.p12

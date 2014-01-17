@@ -17,28 +17,29 @@ def upload(source, file_name)
   analytics = client.discovered_api('analytics', 'v3')
 
   # Load client secrets from your client_secrets.json.
-  client_secrets = Google::APIClient::ClientSecrets.load
+  key = Google::APIClient::PKCS12.load_key('privatekey.p12', 'notasecret')
 
   # Load personal data (acct info, custom data source, web property id)
   # from persoal_data.json.
   personal_data = JSON.parse(File.read('personal_data.json'))
 
   # Authorize
-  flow = Google::APIClient::InstalledAppFlow.new(
-    :client_id => client_secrets.client_id,
-    :client_secret => client_secrets.client_secret,
-    :scope => ['https://www.googleapis.com/auth/analytics']
+  
+  service_account = Google::APIClient::JWTAsserter.new(
+    personal_data['serviceEmail'],
+    'https://www.googleapis.com/auth/analytics',
+    key
   )
-  client.authorization = flow.authorize
+  client.authorization = service_account.authorize
 
   t = Time.now
   t = t.strftime "%Y-%m-%d"
   # Make an API call.
   media = Google::APIClient::UploadIO.new(file_name, 'application/octet-stream')
   metadata = {
-      'title'     => t + ":daily_upload",
-      'mimeType'  => 'application/octet-stream',
-      'resumable' => true
+    'title'     => t + ":daily_upload",
+    'mimeType'  => 'application/octet-stream',
+    'resumable' => true
   }
 
   result = client.execute(
