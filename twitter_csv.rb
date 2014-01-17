@@ -1,7 +1,6 @@
 require 'csv'
 require './client'
 
-
 #  Takes a CSV file of ad data from twitter 
 #  and converts it for google analytics 
 #

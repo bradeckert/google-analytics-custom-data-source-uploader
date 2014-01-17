@@ -4,7 +4,6 @@ require 'net/http'
 require 'time'
 require './client'
 
-
 #  Calls the facebook ad API to get ad data 
 #  and converts it to a CSV for google analytics 
 #
@@ -21,7 +20,6 @@ def convert(facebook_out_file_path, facebook_in_file_path)
     end
     File.open(facebook_out_file_path, "wb") { |file| file.write(out) } 
   else
-    puts "Wrong"
     # TODO: Need access tokens
     # This code will call facebook api and get ad data back
     # TODO: Add facebook acct info to personal_data.json
@@ -54,5 +52,5 @@ end
 
 if __FILE__ == $0
 	convert(ARGV[0], ARGV[1])
-  client.upload('facebook', ARGV[0])
+  upload('facebook', ARGV[0])
 end
