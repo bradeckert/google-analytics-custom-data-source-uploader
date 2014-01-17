@@ -1,6 +1,5 @@
 .bundle/
-f_test.csv
-t_test.csv
+*.csv
 Gemfile.lock
 personal_data.json
 .DS_Store
