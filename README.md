@@ -7,7 +7,7 @@ This ruby script imports data (cost, clicks, etc.) from facebook and twitter ad 
 ##:notebook: Setup:
 1. Make sure you have Ruby installed
 2. Go to Google Analytics, [setup a Service Account](https://developers.google.com/console/help/#service_accounts), and download a .p12 private key file. Name it `privatekey.p12` and move it in the directory.
-3. On the Analytics Admin dashboard, create a custom data source named something like "twitter.com" or "facebook.com", and get the `customDataSource` variable.
+3. On the Analytics Admin dashboard, create a custom data source named something like "twitter.com" or "facebook.com", and get the `customDataSourceId` variable.
 4. Figure out what dimentions you will require from a twitter/facebook csv and on Google Analytics - [More info here](https://developers.google.com/analytics/devguides/platform/cost-data-import#dims_mets)
 5. If you require different dimentions from what I used (shown below), you must edit the `twitter_csv.rb` and `facebook_csv.rb` to reflect what you want. Change the `$order_out=[ga:dimensions]` variable and the `out_temp=[csv dimensions]` lines.
 6. Create a personal_data.json file in the directory, format below.
@@ -33,7 +33,8 @@ Note: As of version 1.0, api requests to facebook are not supported.
 	ga:impressions  | Impressions  | Impressions
 
 ### Format of personal_data.json: (None of this needs to be encrypted)
-`{
+```json
+{
 	"accountId":"XXXXXXXX",
 	"webPropertyId":"UA-XXXXXXXX-X",
 	"serviceEmail":"XXX@developer.gserviceaccount.com",
@@ -42,7 +43,8 @@ Note: As of version 1.0, api requests to facebook are not supported.
 		"twitter":"XXXXXXXXXXXXXX",
 		"facebook":"XXXXXXXXXXXXXX"
 	}
-}`
+}
+```
 
 ##:exclamation: TODO:
 
