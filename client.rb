@@ -4,10 +4,10 @@ require 'google/api_client/auth/installed_app'
 require 'time'
 require 'json'
 
-def upload(file_name)
+def upload(source, file_name)
   # Initialize the client.
   client = Google::APIClient.new(
-    :application_name => 'Twitter CSV Upload',
+    :application_name => 'Twitter/Facebook CSV Upload',
     :application_version => '1.0.0'
   )
 
@@ -49,7 +49,7 @@ def upload(file_name)
                     'accountId'           => personal_data['accountId'],
                     'appendNumber'        => 1,
                     'reset'               => true,
-                    'customDataSourceId'  => personal_data['customDataSourceId'],
+                    'customDataSourceId'  => personal_data['customDataSourceId'][source],
                     'date'                => t,
                     'type'                => "cost",
                     'webPropertyId'       => personal_data['webPropertyId']
@@ -62,5 +62,5 @@ def upload(file_name)
 end
 
 if __FILE__ == $0
-  upload(ARGV[0])
+  upload(ARGV[0], ARGV[1])
 end

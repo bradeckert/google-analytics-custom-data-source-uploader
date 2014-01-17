@@ -2,6 +2,7 @@ require 'csv'
 require 'json'
 require 'net/http'
 require 'time'
+require './client'
 
 
 #  Calls the facebook ad API to get ad data 
@@ -10,8 +11,8 @@ require 'time'
 #  Output: CSV ready to be uploaded to GA
 $order_out = ['ga:source','ga:medium','ga:campaign','ga:adCost','ga:adClicks','ga:impressions']
 
-def convert(facebook_out_file_path, facebook_in_file_path=nil)
-  if(facebook_in_file_path)
+def convert(facebook_out_file_path, facebook_in_file_path)
+  if(facebook_in_file_path != "")
     # manually convert a facebook csv to correct format
     out = $order_out.to_csv
     CSV.foreach(facebook_in_file_path, :headers => true) do |row|
@@ -53,4 +54,5 @@ end
 
 if __FILE__ == $0
 	convert(ARGV[0], ARGV[1])
+  client.upload('facebook', ARGV[0])
 end
