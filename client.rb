@@ -21,7 +21,7 @@ def upload(source, file_name)
 
   # Load personal data (acct info, custom data source, web property id)
   # from persoal_data.json.
-  personal_data = JSON.parse(File.read('personal_data.json'))
+  personal_data = JSON.parse(File.read('personal_data.json'))["upload"]
 
   # Authorize
   
@@ -58,6 +58,7 @@ def upload(source, file_name)
   )
   # Uncomment this line to view the server response
   # puts result.data.to_hash
+  puts "Uploaded"
 end
 
 if __FILE__ == $0

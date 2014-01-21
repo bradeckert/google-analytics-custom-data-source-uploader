@@ -7,4 +7,4 @@ source 'https://rubygems.org'
 
 gem 'google-api-client'
 gem 'json'
-gem 'omniauth-facebook'
+gem 'selenium-webdriver'
