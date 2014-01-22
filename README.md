@@ -24,11 +24,11 @@ This ruby script imports data (cost, clicks, etc.) from facebook and twitter ad 
 	Google 			| Facebook 	   | Twitter
 	----------------|--------------|--------------
 	ga:source 		| facebook.com | twitter.com
-	ga:medium 		| cpc 		   | product type
-	ga:campaign 	| Campaign 	   | campaign
-	ga:adCost 		| Spend (USD)  | Spend
-	ga:adClicks 	| Clicks 	   | Clicks
-	ga:impressions  | Impressions  | Impressions
+	ga:medium 		| cpc 		   | Product type
+	ga:campaign 	| Campaign 	   | Campaign name
+	ga:adCost 		| Spend (USD)  | Campaign Daily spend
+	ga:adClicks 	| Clicks 	   | Total engagements/follows
+	ga:impressions  | Impressions  | Total impressions
 
 ### Format of personal_data.json: 
 ```json
