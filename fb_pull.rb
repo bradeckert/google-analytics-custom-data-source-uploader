@@ -8,8 +8,8 @@ def get_facebook_data
 	profile['browser.helperApps.neverAsk.saveToDisk'] = 'text/csv'
 	profile['pdfjs.disabled'] = true
 
-	driver = Selenium::WebDriver.for :firefox, :profile => profile
-	driver.manage.window.resize_to(800,800)
+	driver = Selenium::WebDriver.for :phantomjs
+	#driver.manage.window.resize_to(800,800)
 
 	# Load personal data (login/password)
   	# from persoal_data.json.
@@ -22,7 +22,7 @@ def get_facebook_data
 	password.send_keys personal_data["password"]
 	password.submit
 
-	wait = Selenium::WebDriver::Wait.new(:timeout => 15) # seconds
+	wait = Selenium::WebDriver::Wait.new(:timeout => 10) # seconds
 	wait.until { driver.find_element(:class, "bt-export-button") }
 
 	export_button = driver.find_element(:class, "bt-export-button")

@@ -11,9 +11,12 @@ This ruby script imports data (cost, clicks, etc.) from facebook and twitter ad 
 4. Figure out what dimentions you will require from a twitter/facebook csv and on Google Analytics - [More info here](https://developers.google.com/analytics/devguides/platform/cost-data-import#dims_mets)
 5. If you require different dimentions from what I used (shown below), you must edit the `twitter_csv.rb` and `facebook_csv.rb` to reflect what you want. Change the `$order_out=[ga:dimensions]` variable and the `out_temp=[csv dimensions]` lines.
 6. Create a personal_data.json file in the directory, format below.
+7. Follow all the steps to install Ghost Driver and phantomJS [here](https://github.com/detro/ghostdriver)
 
 
 ##:mega: Executing the script
+First run `java -jar selenium-server-standalone-2.39.0.jar -role hub` and `phantomjs --webdriver=8080 --webdriver-selenium-grid-hub=http://127.0.0.1:4444` to set up your headless environment. Then:
+
 * Twitter: Run `ruby twitter_pull.rb`
 * Facebook: Run `ruby fb_pull.rb`
 

@@ -2,14 +2,14 @@ require 'selenium-webdriver'
 require './twitter_csv'
 
 def get_twitter_data
-	profile = Selenium::WebDriver::Firefox::Profile.new
-	profile['browser.download.dir'] = "~/nest/adcosttracking"
-	profile['browser.download.folderList'] = 2
-	profile['browser.helperApps.neverAsk.saveToDisk'] = 'text/csv'
-	profile['pdfjs.disabled'] = true
+	# profile = Selenium::WebDriver::Firefox::Profile.new
+	# profile['browser.download.dir'] = "~/nest/adcosttracking"
+	# profile['browser.download.folderList'] = 2
+	# profile['browser.helperApps.neverAsk.saveToDisk'] = 'text/csv'
+	# profile['pdfjs.disabled'] = true
 
-	driver = Selenium::WebDriver.for :firefox, :profile => profile
-	driver.manage.window.resize_to(800,800)
+	driver = Selenium::WebDriver.for :phantomjs
+	# driver.manage.window.resize_to(800,800)
 
 	# Load personal data (login/password)
   	# from persoal_data.json.
