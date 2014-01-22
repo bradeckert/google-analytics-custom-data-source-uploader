@@ -1,11 +1,11 @@
-#Google Analytics Custom Data Source Uploader, v0.1.0
+#Google Analytics Custom Data Source Uploader, v1.0.0
 ==================================
 
 ##:newspaper: Description
 This ruby script imports data (cost, clicks, etc.) from facebook and twitter ad campaigns into Google Analytics. Both facebook and twitter keep track of tons of data about an ad campaign: how much you spend, how many clicks that generated, conversion rate, etc. As of now there is no easy way to get this data into Google Analytics to better monitor which campaigns are the most effective. This goal of this project is to fetch your data from a third party (or just given a csv file), and import it automatically into Google once per day.
 
 ##:notebook: Setup:
-1. Make sure you have Ruby installed
+1. Make sure you have Ruby installed, along with Firefox
 2. Go to Google Analytics, [setup a Service Account](https://developers.google.com/console/help/#service_accounts), and download a .p12 private key file. Name it `privatekey.p12` and move it in the directory.
 3. On the Analytics Admin dashboard, create a custom data source named something like "twitter.com" or "facebook.com", and get the `customDataSourceId` variable.
 4. Figure out what dimentions you will require from a twitter/facebook csv and on Google Analytics - [More info here](https://developers.google.com/analytics/devguides/platform/cost-data-import#dims_mets)
@@ -14,10 +14,8 @@ This ruby script imports data (cost, clicks, etc.) from facebook and twitter ad 
 
 
 ##:mega: Executing the script
-Note: As of version 0.1.0, api requests to facebook are not supported.
-
-* Twitter: Run `ruby twitter_csv.rb [out_name].csv [in_name].csv`
-* Facebook: Run `ruby facebook_csv.rb [out_name].csv [in_name].csv`
+* Twitter: Run `ruby twitter_pull.rb`
+* Facebook: Run `ruby fb_pull.rb`
 
 
 ##:blue_book: Formatting
@@ -32,16 +30,33 @@ Note: As of version 0.1.0, api requests to facebook are not supported.
 	ga:adClicks 	| Clicks 	   | Clicks
 	ga:impressions  | Impressions  | Impressions
 
-### Format of personal_data.json: (None of this needs to be encrypted)
+### Format of personal_data.json: 
 ```json
 {
-	"accountId":"XXXXXXXX",
-	"webPropertyId":"UA-XXXXXXXX-X",
-	"serviceEmail":"XXX@developer.gserviceaccount.com",
-	"customDataSourceId":
+	"upload":
 	{
-		"twitter":"XXXXXXXXXXXXXX",
-		"facebook":"XXXXXXXXXXXXXX"
+		"accountId":"XXXXXXXX",
+		"webPropertyId":"UA-XXXXXXXX-X",
+		"serviceEmail":"XXXXXXX@developer.gserviceaccount.com",
+		"customDataSourceId":
+		{
+			"twitter":"XXXXXXXXXXXXXXXXXXXXXX",
+			"facebook":"XXXXXXXXXXXXXXXXXXXXX"
+		}
+	},
+	"download":
+	{
+		"twitter":
+		{
+			"login": "XXXXXXX",
+			"password": "XXXXXXXX"
+		},
+		"facebook":
+		{
+			"login": "XXXXXXX",
+			"password": "XXXXXXXXXX",
+			"accountId": "XXXXXXXXXXXXXXXX"
+		}
 	}
 }
 ```
@@ -49,8 +64,7 @@ Note: As of version 0.1.0, api requests to facebook are not supported.
 ##:exclamation: TODO:
 
 * Enable support for auto data fetch from both facebook and twitter by hitting their ads API. 
-	Twitter's API is in beta and only certain companies have access
-	Facebook requires the account to be a developer and you must create an app to get a secret key.
+	Both Twitter and Facebook's API's are in beta and only certain companies have access
 * Deploy so this runs automatically each day
 * Turn into a ruby gem for easy install
 

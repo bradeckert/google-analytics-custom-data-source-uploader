@@ -14,6 +14,7 @@ def convert(twitter_in_file_path)
 	end
 	File.open("out_" + twitter_in_file_path, "wb") { |file| file.write(out) }	
 	puts "Converted"
+	File.delete(twitter_in_file_path)
 	return "out_" + twitter_in_file_path
 end
 

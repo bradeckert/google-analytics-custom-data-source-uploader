@@ -59,6 +59,7 @@ def upload(source, file_name)
   # Uncomment this line to view the server response
   # puts result.data.to_hash
   puts "Uploaded"
+  File.delete(file_name)
 end
 
 if __FILE__ == $0
