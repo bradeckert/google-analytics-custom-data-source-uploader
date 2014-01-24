@@ -11,6 +11,11 @@ This ruby script imports data (cost, clicks, etc.) from facebook and twitter ad 
 4. Figure out what dimentions you will require from a twitter/facebook csv and on Google Analytics - [More info here](https://developers.google.com/analytics/devguides/platform/cost-data-import#dims_mets)
 5. If you require different dimentions from what I used (shown below), you must edit the `twitter_csv.rb` and `facebook_csv.rb` to reflect what you want. Change the `$order_out=[ga:dimensions]` variable and the `out_temp=[csv dimensions]` lines.
 6. Create a personal_data.json file in the directory, format below.
+7. If you want this to run headless, must be done on an ubuntu server. Otherwise you must comment out the top two lines in both `twitter_pull.csv` and `fb_pull.csv`.
+8. Set up the ubuntu server with firefox, rbenv, ruby 2.0.0-p353, git, and bundler. For development make sure your computer has X11 if on a mac.
+9. In ubuntu run `firefox -profilemanager` and create a new profile (or load the example provided in `/firefox_profile/`).
+10. Create a new profile and go to the twitter campaigns page, login, and download a CSV. Click "Don't ask to download file of this type" checkbox.
+11. You are ready to go! See Executing the script below.
 
 
 ##:mega: Executing the script

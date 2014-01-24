@@ -3,6 +3,7 @@ require 'headless'
 require './twitter_csv'
 
 def get_twitter_data
+	# headless setup, comment out if you want regular browser
 	headless = Headless.new(reuse: true, destroy_at_exit:false)
 	headless.start
 
@@ -38,7 +39,7 @@ def get_twitter_data
 	driver.find_element(:class, 'csvButtonContainer').click
 	sleep(8)
 	Puts "Downloaded"
-	
+
 	convert_and_upload("metrics.csv")
 	driver.quit
 end
