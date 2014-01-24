@@ -13,9 +13,8 @@ This ruby script imports data (cost, clicks, etc.) from facebook and twitter ad 
 6. Create a personal_data.json file in the directory, format below.
 7. If you want this to run headless, must be done on an ubuntu server. Otherwise you must comment out the top two lines in both `twitter_pull.csv` and `fb_pull.csv`.
 8. Set up the ubuntu server with firefox, rbenv, ruby 2.0.0-p353, git, and bundler. For development make sure your computer has X11 if on a mac.
-9. In ubuntu run `firefox -profilemanager` and create a new profile (or load the example provided in `/firefox_profile/`).
-10. Create a new profile and go to the twitter campaigns page, login, and download a CSV. Click "Don't ask to download file of this type" checkbox.
-11. You are ready to go! See Executing the script below.
+9. In ubuntu run `firefox -profilemanager`, click create a new profile and go to the twitter campaigns page, login, and download a CSV. Click "Don't ask to download file of this type" checkbox. Also set it so your files are automatically downloaded into this directory.
+10. You are ready to go! See Executing the script below.
 
 
 ##:mega: Executing the script

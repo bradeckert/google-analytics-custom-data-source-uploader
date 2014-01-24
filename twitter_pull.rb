@@ -38,7 +38,7 @@ def get_twitter_data
 	wait.until { driver.find_element(:class, 'csvButtonContainer') }
 	driver.find_element(:class, 'csvButtonContainer').click
 	sleep(8)
-	Puts "Downloaded"
+	puts "Downloaded"
 
 	convert_and_upload("metrics.csv")
 	driver.quit
