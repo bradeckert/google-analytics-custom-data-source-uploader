@@ -4,7 +4,7 @@ require './facebook_csv'
 
 def get_facebook_data
 	headless = Headless.new(reuse: true, destroy_at_exit:false)
-        headless.start
+  headless.start
 
 	profile = Selenium::WebDriver::Firefox::Profile.new
 	profile['browser.download.dir'] = "~/adcosttracker"
@@ -13,11 +13,10 @@ def get_facebook_data
 	profile['pdfjs.disabled'] = true
 
 	driver = Selenium::WebDriver.for :firefox, :profile => profile
-	driver.manage.window.resize_to(800,800)
 
 	# Load personal data (login/password)
-  	# from persoal_data.json.
-  	personal_data = JSON.parse(File.read('personal_data.json'))["download"]["facebook"]
+	# from persoal_data.json.
+	personal_data = JSON.parse(File.read('personal_data.json'))["download"]["facebook"]
 
 	driver.navigate.to "https://www.facebook.com/ads/manage/reporting.php?act=#{personal_data["acccountId"]}"
 	username = driver.find_element(:id, 'email')
@@ -42,6 +41,7 @@ def get_facebook_data
 
 	# wait for download to complete
 	sleep(1)
+	puts "Downloaded"
 
 	t = Time.now
 	today = t.strftime "%Y-%m-%d"
