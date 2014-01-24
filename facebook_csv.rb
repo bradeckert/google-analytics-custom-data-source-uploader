@@ -3,7 +3,6 @@ require 'json'
 require 'net/http'
 require 'time'
 require './client'
-require 'debugger'
 
 #  Calls the facebook ad API to get ad data 
 #  and converts it to a CSV for google analytics 

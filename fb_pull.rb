@@ -1,9 +1,13 @@
 require 'selenium-webdriver'
+require 'headless'
 require './facebook_csv'
 
 def get_facebook_data
+	headless = Headless.new(reuse: true, destroy_at_exit:false)
+        headless.start
+
 	profile = Selenium::WebDriver::Firefox::Profile.new
-	profile['browser.download.dir'] = "~/nest/adcosttracking"
+	profile['browser.download.dir'] = "~/adcosttracker"
 	profile['browser.download.folderList'] = 2
 	profile['browser.helperApps.neverAsk.saveToDisk'] = 'text/csv'
 	profile['pdfjs.disabled'] = true

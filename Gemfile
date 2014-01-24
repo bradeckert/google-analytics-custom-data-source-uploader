@@ -7,4 +7,5 @@ source 'https://rubygems.org'
 
 gem 'google-api-client'
 gem 'json'
+gem 'headless'
 gem 'selenium-webdriver'

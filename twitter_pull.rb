@@ -2,6 +2,10 @@ require 'selenium-webdriver'
 require './twitter_csv'
 
 def get_twitter_data
+	headless = Headless.new(reuse: true, destroy_at_exit:false)
+	headless.start
+
+
 	profile = Selenium::WebDriver::Firefox::Profile.new
 	profile['browser.download.dir'] = "~/nest/adcosttracking"
 	profile['browser.download.folderList'] = 2
