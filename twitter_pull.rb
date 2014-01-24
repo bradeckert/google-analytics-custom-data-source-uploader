@@ -3,8 +3,8 @@ require 'headless'
 require './twitter_csv'
 
 def get_twitter_data
-#	headless = Headless.new(reuse: true, destroy_at_exit:false)
-#	headless.start
+	headless = Headless.new(reuse: true, destroy_at_exit:false)
+	headless.start
 
 	profile = Selenium::WebDriver::Firefox::Profile.new
 	profile['browser.download.dir'] = "~/adcosttracker"
@@ -12,23 +12,28 @@ def get_twitter_data
 	profile['browser.helperApps.neverAsk.saveToDisk'] = 'text/csv'
 	profile['pdfjs.disabled'] = true
 
-	driver = Selenium::WebDriver.for :firefox, :profile => profile
+	prof = Selenium::WebDriver::Firefox::Profile.from_name('WebDriver')
+
+	driver = Selenium::WebDriver.for :firefox, :profile => prof
 
 	# Load personal data (login/password)
   	# from persoal_data.json.
   	personal_data = JSON.parse(File.read('personal_data.json'))["download"]["twitter"]
 
 	driver.navigate.to "https://twitter.com/login?redirect_after_login=https%3A%2F%2Fads.twitter.com%2Faccounts%#{personal_data["accountId"]}%2Fcampaigns_dashboard"
-	username = driver.find_elements(:name, 'session[username_or_email]')[1]
-	password = driver.find_elements(:name, 'session[password]')[1]
-	username.send_keys personal_data["login"]
-	password.send_keys personal_data["password"]
-	password.submit
-
-        wait = Selenium::WebDriver::Wait.new(:timeout => 15) # seconds
+	wait = Selenium::WebDriver::Wait.new(:timeout => 15) # seconds
 	
-	wait.until { driver.find_element(:class, 'popup-close') }
-	driver.find_element(:class, 'popup-close').click
+	if driver.title != "Campaign overview - Twitter Ads"
+		username = driver.find_elements(:name, 'session[username_or_email]')[1]
+		password = driver.find_elements(:name, 'session[password]')[1]
+		username.send_keys personal_data["login"]
+		password.send_keys personal_data["password"]
+		password.submit
+	        
+		wait.until { driver.find_element(:class, 'popup-close') }	
+		driver.find_element(:class, 'popup-close').click
+        end 
+	
 	wait.until { driver.find_element(:class, 'csvButtonContainer') }
 	driver.find_element(:class, 'csvButtonContainer').click
 
