@@ -4,3 +4,4 @@ Gemfile.lock
 personal_data.json
 .DS_Store
 *.p12
+firefox_profile/
