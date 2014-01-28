@@ -53,7 +53,8 @@ This ruby script imports data (cost, clicks, etc.) from facebook and twitter ad 
 		"twitter":
 		{
 			"login": "XXXXXXX",
-			"password": "XXXXXXXX"
+			"password": "XXXXXXXX",
+			"accountId": "XXXXXXXX"
 		},
 		"facebook":
 		{
