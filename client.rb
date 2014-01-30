@@ -33,7 +33,7 @@ def upload(source, file_name)
   client.authorization = service_account.authorize
 
   t = Time.now
-  t = t.strftime "%Y-%m-%d"
+  t = t.strftime "%Y-%m-#{t.day-1}"
   # Make an API call.
   media = Google::APIClient::UploadIO.new(file_name, 'application/octet-stream')
   metadata = {
@@ -57,7 +57,7 @@ def upload(source, file_name)
     :body_object => metadata
   )
   # Uncomment this line to view the server response
-  # puts result.data.to_hash
+  puts result.data.to_hash
   puts "Uploaded"
   File.delete(file_name)
 end

@@ -8,9 +8,13 @@ require './client'
 $order_out = ['ga:source', 'ga:medium', 'ga:campaign', 'ga:adCost', 'ga:adClicks', 'ga:impressions']
 def convert(twitter_in_file_path)
 	out = $order_out.to_csv
+	t = Time.now
+	t = t.strftime "%Y-%m-#{t.day-1}"
 	CSV.foreach(twitter_in_file_path, :headers => true) do |row|
-		out_temp = ['twitter.com', row['Product type'], row['Campaign name'], row['Campaign daily spend'], row['Total engagements/follows'], row['Total impressions']]
-		out += out_temp.to_csv
+		if row['time'].include? t
+			out_temp = ['twitter.com', row['product type'], row['campaign'], row['Spend'].to_f.round(2), row['Clicks'], row['Impressions']]
+			out += out_temp.to_csv
+		end
 	end
 	File.open("out_" + twitter_in_file_path, "wb") { |file| file.write(out) }	
 	puts "Converted"

@@ -5,7 +5,7 @@ require './facebook_csv'
 def get_facebook_data
 	# headless setup, comment out if you want regular browser
 	headless = Headless.new(reuse: true, destroy_at_exit:false)
-  headless.start
+	headless.start
 
 	profile = Selenium::WebDriver::Firefox::Profile.new
 	profile['browser.download.dir'] = "~/adcosttracker"
@@ -27,26 +27,39 @@ def get_facebook_data
 	password.submit
 
 	wait = Selenium::WebDriver::Wait.new(:timeout => 15) # seconds
+	wait.until { driver.find_element(:class, "btButton-text") }
+	date_button = driver.find_element(:class, "btButton-text")
+	date_button.click
+	wait.until { driver.find_element(:class, "bt-selector-item") }
+	times = driver.find_elements(:class, "bt-selector-item") 
+	times.each do |time|
+		if time.text == "Yesterday"
+			time.click
+		end
+	end
+	sleep(1)
 	wait.until { driver.find_element(:class, "bt-export-button") }
 
 	export_button = driver.find_element(:class, "bt-export-button")
 	export_button.click
+	sleep(1)
 	wait.until { driver.find_element(:class, "btMenuItem") }
 
 	items = driver.find_elements(:class, "btMenuItem")
 	items.each do |item|
 		if item.attribute("data-ref") == "csv"
 			item.click
+			break
 		end
 	end
 
 	# wait for download to complete
-	sleep(1)
+	sleep(3)
 	puts "Downloaded"
 
 	t = Time.now
 	today = t.strftime "%Y-%m-%d"
-	convert_and_upload("General Metrics, #{t.year}-#{t.strftime("%m")}-#{t.day-6} - #{t.year}-#{t.strftime("%m")}-#{t.day+1}.csv")
+	convert_and_upload("General Metrics, #{t.year}-#{t.strftime("%m")}-#{t.day-1} - #{t.year}-#{t.strftime("%m")}-#{t.day}.csv")
 
 	driver.quit
 end
