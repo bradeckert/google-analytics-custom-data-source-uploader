@@ -18,8 +18,12 @@ This ruby script imports data (cost, clicks, etc.) from facebook and twitter ad 
 
 
 ##:mega: Executing the script
+### To run the full script of pulling~>converting~uploading:
 * Twitter: Run `ruby twitter_pull.rb`
 * Facebook: Run `ruby fb_pull.rb`
+### To run only converting~>uploading on `filename.csv`:
+* Twitter: Run `ruby twitter_csv.rb filename.csv`
+* Facebook: Run `ruby facebook_csv.rb filename.csv`
 
 
 ##:blue_book: Formatting
@@ -30,7 +34,7 @@ This ruby script imports data (cost, clicks, etc.) from facebook and twitter ad 
 	ga:source 		| facebook.com | twitter.com
 	ga:medium 		| cpc 		   | Product type
 	ga:campaign 	| Campaign 	   | Campaign name
-	ga:adCost 		| Spend (USD)  | Campaign Daily spend
+	ga:adCost 		| Spend (USD)  | Campaign daily spend
 	ga:adClicks 	| Clicks 	   | Total engagements/follows
 	ga:impressions  | Impressions  | Total impressions
 
